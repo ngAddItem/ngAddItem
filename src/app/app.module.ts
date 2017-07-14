@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import { RequisitionService } from './model/requisition.service';
 
 import { AppComponent } from './app.component';
 import { RequisitionComponent } from './requisition/requisition.component';
@@ -7,6 +9,8 @@ import { VendorComponent } from './vendor/vendor.component';
 import { ItemComponent } from './item/item.component';
 import { GlAccountComponent } from './gl-account/gl-account.component';
 import { ProjectComponent } from './project/project.component';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 @NgModule({
   declarations: [
@@ -18,9 +22,11 @@ import { ProjectComponent } from './project/project.component';
     ProjectComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
-  providers: [],
+  providers: [RequisitionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

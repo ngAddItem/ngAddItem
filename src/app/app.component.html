@@ -4,15 +4,12 @@
     Welcome to {{title}}!!
   </h1>
      <div >
-       <ul style="list-style: none;">
-          <li>Requisition Id: {{req.requisitionId}}</li>
-          <li>Requisition Title: {{req.requisitionTitle}}</li>
-          <li>Requisition Type: {{req.requisitionType}}</li>
-          <li>User ID: {{req.userId}}</li>
-          <li>Project Number: {{req.projectNumber}}</li>
-          <li>Location: {{req.locationName}}</li>
-          <li>Notes: {{req.notes}}</li>
-       </ul>
+        <ul style="list-style: none;">
+          <li *ngFor="let requisition of requisitions" >
+            <span class="badge">{{requisition.requisitionId}}</span>
+            <span>{{requisition.requisitionTitle}}</span>
+          </li>
+        </ul>
      </div>
 
 </div>

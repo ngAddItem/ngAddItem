@@ -1,0 +1,10 @@
+div.test {
+    width: 600px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2%;
+    background-color: lightgray;
+    box-shadow: 10px 10px 5px #888888;
+}

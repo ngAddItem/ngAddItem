@@ -1,3 +1,6 @@
+import { RequisitionLine } from './requisition-line.model';
+import { Vendor } from './vendor.model';
+
 export class Requisition {
     requisitionId: number;
     requisitionTitle: string;
@@ -17,6 +20,11 @@ export class Requisition {
     invoiceNumber: string;
     invoiceDate: Date;
     billToLocationId: number;
+    requisitionLines: RequisitionLine[];
+    getVendorName(): string {
+        console.log(this.requisitionLines[0]);
+        return this.requisitionLines[0].vendorName;
+    }
 }
 
 export enum RequisitionType {
@@ -59,26 +67,3 @@ export enum RequisitionStatus {
     FullyReceived = 13,
     PostedOnHold = 14
 }
-
-export const requisitions: Requisition[] = [
-  {
-    requisitionId: 1,
-    requisitionTitle: 'My First Requisition',
-    requisitionType: RequisitionType.Requisition,
-    departmentId: 2,
-    userId: 1024,
-    dateRequested: null,
-    justification: '',
-    status: RequisitionStatus.Incomplete,
-    projectNumber: '00-195',
-    companyId: 2,
-    locationName: 'Warehouse 1',
-    notes: 'N/A',
-    locationId: 12,
-    shipMethodId: 9,
-    requestTypeId: 1,
-    invoiceNumber: '',
-    invoiceDate: null,
-    billToLocationId: 1
-  },
-];

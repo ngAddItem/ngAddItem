@@ -1,16 +1,18 @@
 <!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-     <div >
-        <ul style="list-style: none;">
-          <li *ngFor="let requisition of requisitions" >
-            <span class="badge">{{requisition.requisitionId}}</span>
-            <span>{{requisition.requisitionTitle}}</span>
-          </li>
-        </ul>
-     </div>
 
+<div style="text-align:center">
+  <h1>Requisitions</h1>
+      <div class="test" style="width:1000px">  
+        <ag-grid-angular style="width: 900px; height: 115px;"
+                        class="ag-fresh"
+                        [rowData]="rowData"
+                        [columnDefs]="columnDefs"
+                        [gridOptions]="gridOptions"
+                        (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+      </div>
 </div>
 
+<div>
+
+</div>

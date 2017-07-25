@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Requisition } from './requisition.model';
 
-import 'rxjs/add/operator/toPromise';
+
+  import { Observable } from 'rxjs/Rx'
+  import 'rxjs/add/operator/map';
+  import 'rxjs/add/operator/catch';
+  import 'rxjs/add/observable/throw';
+  import 'rxjs/add/operator/toPromise';
+
+  const REQUISITIONS_API = 'http://localhost:3000/requisitions'
 
 @Injectable()
 export class RequisitionService {
@@ -12,9 +19,9 @@ export class RequisitionService {
   constructor(private http: Http) { }
 
   getRequisitions(): Promise<any> {
-    return this.http.get(this.requisitionUrl)
+    return this.http.get(REQUISITIONS_API)
                .toPromise()
-               .then(response => response.json().data)
+               .then(response => response.json())
                .catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {

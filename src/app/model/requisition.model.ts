@@ -1,15 +1,17 @@
 import { RequisitionLine } from './requisition-line.model';
 import { Vendor } from './vendor.model';
+import { User } from './user.model';
 
+import { Expose } from 'class-transformer';
 export class Requisition {
     requisitionId: number;
     requisitionTitle: string;
-    requisitionType: RequisitionType;
     departmentId: number;
     userId: number;
+    user: User;
     dateRequested: Date;
     justification: string;
-    status: RequisitionStatus;
+    statusId: number;
     projectNumber: string;
     companyId: number;
     locationName: string;
@@ -20,11 +22,26 @@ export class Requisition {
     invoiceNumber: string;
     invoiceDate: Date;
     billToLocationId: number;
-    requisitionLines: RequisitionLine[];
-    getVendorName(): string {
-        console.log(this.requisitionLines[0]);
-        return this.requisitionLines[0].vendorName;
+    private requisitionType: number;
+    @Expose()
+    get statusName(): string {
+        return RequisitionStatus[this.statusId];
     }
+    @Expose()
+    get shipDate(): Date {
+        // console.log('ship date: ' + this.requisitionLines[0].shipDate);
+        return this.requisitionLines[0].shipDate;
+    }
+    @Expose()
+    get requisitionTypeName(): string {
+        console.log(this.requisitionType);
+        return RequisitionType[this.requisitionType];
+    }
+    @Expose()
+    get total(): number {
+        return this.requisitionLines.reduce((p, n) => p + n.price, 0);
+    }
+    requisitionLines: RequisitionLine[];
 }
 
 export enum RequisitionType {

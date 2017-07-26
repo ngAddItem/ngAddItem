@@ -16,6 +16,7 @@ import { ProjectComponent } from './project/project.component';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { RedComponentComponent } from './red-component/red-component.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

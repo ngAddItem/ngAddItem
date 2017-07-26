@@ -1,14 +1,29 @@
 {
+    "Vendors" : [
+        {
+        "VendorName": "ABC Vendor"
+        }
+    ],
+    "users" : [
+        {
+            "userId": 1024,
+            "userName": "John Smith"
+        },
+                {
+            "userId": 512,
+            "userName": "Bob Jones"
+        }
+    ],
     "requisitions" : [
         {
             "requisitionId": 10001,
             "requisitionTitle": "My First Requisition",
-            "requisitionType": 1,
+            "requisitionType": 3,
             "departmentId": 2,
-            "userId": 1024,
+            "userId": 512,
             "dateRequested": null,
             "justification": "",
-            "status": 1,
+            "statusId": 6,
             "projectNumber": "00-195",
             "companyId": 2,
             "locationName": "Seattle Warehouse 1",
@@ -25,7 +40,7 @@
                     "requisitionLineId": 1,
                     "glAccountId": "1030",
                     "glAccountDescription": "Account Description",
-                    "price": 19.95,
+                    "price": 29.95,
                     "quantity": 10,
                     "taxRate": 0,
                     "taxAmount": 0,
@@ -41,7 +56,7 @@
                     "companyId": 2,
                     "targetCompany": "",
                     "locationId": 0,
-                    "shipDate": null,
+                    "shipDate": "7/22/2017",
                     "vendorId": "99",
                     "vendorName": "Amazon",
                     "vendorClassId": "",
@@ -57,7 +72,7 @@
             "userId": 1024,
             "dateRequested": null,
             "justification": "",
-            "status": 1,
+            "statusId": 1,
             "projectNumber": "10-195",
             "companyId": 2,
             "locationName": "Tacoma Warehouse",
@@ -74,7 +89,7 @@
                     "requisitionLineId": 1,
                     "glAccountId": "1030",
                     "glAccountDescription": "Account Description",
-                    "price": 19.95,
+                    "price": 9.95,
                     "quantity": 10,
                     "taxRate": 0,
                     "taxAmount": 0,
@@ -90,7 +105,34 @@
                     "companyId": 2,
                     "targetCompany": "",
                     "locationId": 0,
-                    "shipDate": null,
+                    "shipDate": "7/30/2017",
+                    "vendorId": "99",
+                    "vendorName": "Amazon",
+                    "vendorClassId": "",
+                    "paymentTermsId": ""
+                },
+                 {
+                    "requisitionId": 1,
+                    "requisitionLineId": 1,
+                    "glAccountId": "1030",
+                    "glAccountDescription": "Account Description",
+                    "price": 10.95,
+                    "quantity": 10,
+                    "taxRate": 0,
+                    "taxAmount": 0,
+                    "taxSchedule": "",
+                    "taxClass": "",
+                    "unitOfMeasure": "Each",
+                    "itemId": "Item0001",
+                    "itemDescription": "My Second Item",
+                    "vendorItemId": "",
+                    "projectNumber": "",
+                    "projectDescription": "",
+                    "listed": true,
+                    "companyId": 2,
+                    "targetCompany": "",
+                    "locationId": 0,
+                    "shipDate": "7/30/2017",
                     "vendorId": "99",
                     "vendorName": "Amazon",
                     "vendorClassId": "",

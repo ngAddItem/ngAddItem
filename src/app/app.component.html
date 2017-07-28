@@ -1,17 +1,22 @@
 <!--The whole content below can be removed with the new code.-->
-  <h1>Requisitions</h1>
 <div style="text-align:center">
 
-      <div class="test" style="width:1000px">  
-        <ag-grid-angular style="width: 900px; height: 115px;"
-                        class="ag-fresh"
-                        [rowData]="rowData"
-                        [columnDefs]="columnDefs"
-                        [gridOptions]="gridOptions"
-                        (gridReady)="onGridReady($event)">
-        </ag-grid-angular>
-      </div>
-</div>
-<div>
+  <div class="ui-datatable">
+    <p-dataTable [value]="requisitions" selectionMode="single" [(selection)]="selectedRequisition" dataKey="requisitionId" [rows]="10"
+      [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]">
+      <p-header><h1>Requisition Dashboard</h1></p-header>
 
+      <p-column field="requisitionId" header="Request #"></p-column>
+      <p-column field="requisitionTitle" header="Name"></p-column>
+      <p-column field="locationName" header="Location"></p-column>
+      <p-column field="shipDateDisplay" header="shipDate"></p-column>
+      <p-footer>
+        <div style="text-align: left">Selected Requisition: {{selectedRequisition ? selectedRequisition.requisitionId + ' - ' + selectedRequisition.requisitionTitle
+          : 'none'}}</div>
+      </p-footer>
+    </p-dataTable>
+  </div>
+  <div *ngIf="selectedRequisition">
+    <app-requisition-detail [requisition]="selectedRequisition"></app-requisition-detail>
+  </div>
 </div>

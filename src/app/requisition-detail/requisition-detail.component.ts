@@ -1,30 +1,59 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
-import { Requisition } from '../model/requisition.model';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { SelectItem } from 'primeng/primeng';
+
+import { Requisition, RequisitionStatus, RequisitionType } from '../model/requisition.model';
+import { RequisitionService } from '../model/requisition.service';
 
 @Component({
   selector: 'app-requisition-detail',
-  templateUrl: './requisition-detail.component.html',
-  styleUrls: ['./requisition-detail.component.css']
+  encapsulation: ViewEncapsulation.None,
+  templateUrl: 'requisition-detail.component.html'
 })
 export class RequisitionDetailComponent implements OnInit, OnChanges {
-
   @Input() requisition: Requisition;
   myForm: FormGroup;
+  requestTypeOptions: SelectItem[];
+  statusOptions: SelectItem[];
 
-  constructor(private fb: FormBuilder) {
-    this.myForm = this.fb.group({
-      id: ['', Validators.required],
-      title: ['', Validators.required]
-    })
-   }
-  ngOnChanges(changes: SimpleChanges): void {
-    this.myForm.setValue({
-      id: this.requisition.requisitionId,
-      title: this.requisition.requisitionTitle
+  constructor(
+    private fb: FormBuilder,
+    private requisitionService: RequisitionService
+  ) {
+    this.requestTypeOptions = Object.keys(RequisitionType)
+                                .filter(a => a.match(/^\D/))
+                                .map(label => ( { label, value: RequisitionType[label] as number }));
+   this.statusOptions = Object.keys(RequisitionStatus)
+                                .filter(a => a.match(/^\D/))
+                                .map(label => ( { label, value: RequisitionStatus[label] as number }));
+
+     this.myForm = this.fb.group({
+      requisitionId: '',
+      requisitionTitle: '',
+      requisitionType: '',
+      status: '',
+      locationName: '',
+      shipDateDisplay: '',
     });
   }
+  onSubmit({ value, valid }: { value: any, valid: boolean }) {
+    console.log(value, valid);
+  }
+
   ngOnInit() {
+    this.requisition = this.requisitionService.currentRequisition;
+
+    (<FormGroup>this.myForm).setValue({
+        requisitionId: this.requisition.requisitionId,
+        requisitionTitle: this.requisition.requisitionTitle,
+        requisitionType: this.requisition.requisitionType,
+        status: this.requisition.statusId,
+        locationName: this.requisition.locationName,
+        shipDateDisplay: this.requisition.shipDateDisplay
+    });
+  }
+
+  ngOnChanges(changes: any): void {
   }
 
 }

@@ -1,18 +1,107 @@
-<p-fieldset><p-header>Requisition Detail for {{requisition.requisitionId}}</p-header>
-<form [formGroup]="myForm" >
-  <div class="ui-g">
-    <div class="ui-g-12 ui-md-6">
-      <div class="ui-g-4"><label>ID</label></div>
-      <div class="ui-g-8"><input type="text" formControlName="id">
-        <div *ngIf="!myForm.valid">required</div>
+<p-fieldset>
+  <p-header>ID: {{ requisition.requisitionId }} Name: {{ requisition.requisitionTitle }}</p-header>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" novalidate>
+
+    <div class="ui-g">
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label for="test">ID: </label>
+        </div>
+        <div class="ui-g-8">
+          <input id="test" class="form-control" pInputText formControlName="requisitionId">
+        </div>
       </div>
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Title: </label>
+        </div>
+        <div class="ui-g-8">
+          <input class="form-control" pInputText formControlName="requisitionTitle">
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Requisition Type:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown [options]="requestTypeOptions" formControlName="requisitionType"></p-dropdown>
+        </div>
+
+        <div class="ui-g-4">
+          <label>Status:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-dropdown [options]="statusOptions" formControlName="status"></p-dropdown>
+        </div>
+      </div>
+
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Location:</label>
+        </div>
+        <div class="ui-g-8">
+          <input class="form-control" pInputText formControlName="locationName">
+        </div>
+        <div class="ui-g-4">
+          <label>Ship Date:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar formControlName="shipDateDisplay" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Notes:</label>
+        </div>
+        <div class="ui-g-8">
+          <textarea pInputTextarea></textarea>
+        </div>
+      </div>
+
     </div>
-    <div class="ui-g-12 ui-md-6">
-      <div class="ui-g-4"><label>Title</label></div>
-      <div class="ui-g-8"><input type="text" formControlName="title">
-        <div *ngIf="!myForm.controls['title'].HasErrorr(isvalidphone)">required</div>
-       </div>
-    </div>
+
+  </form>
+  <!-- {{ requisition.requisitionLines | json}} -->
+  <div class="ui-datatable">
+    <p-dataTable [value]="requisition.requisitionLines" selectionMode="single" [(selection)]="selectedLine" dataKey="requisitionLineId"
+      [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]">
+      <!-- <p-header><h1>Requisition Lines</h1></p-header> -->
+
+      <p-column field="itemId" header="Item ID"></p-column>
+      <p-column field="itemDescription" header="Description"></p-column>
+
+      <p-column field="quantity" header="Qty"></p-column>
+      <p-column field="price" header="Cost">
+
+        <ng-template let-col let-req="rowData" pTemplate="body">
+          <span>{{req[col.field] | currency:'USD':true:'1.2-2'}}</span>
+        </ng-template>
+      </p-column>
+
+      <p-column field="taxAmount" header="Tax">
+        <ng-template let-col let-req1="rowData" pTemplate="body">
+          <span>{{req1[col.field] | currency:'USD':true:'1.2-2'}}</span>
+        </ng-template>
+      </p-column>
+      <p-column field="unitOfMeasure" header="UOM"></p-column>
+      <p-column field="shipDate" header="Ship Date">
+         <ng-template let-col let-req2="rowData" pTemplate="body">
+          <span>{{req2[col.field] | date}}</span>
+        </ng-template> 
+      </p-column>
+      <!-- <p-footer>
+        <div style="text-align: left">Selected Requisition: {{selectedRequisition ? selectedRequisition.requisitionId + ' - ' + selectedRequisition.requisitionTitle
+          : 'none'}}</div>
+      </p-footer> -->
+    </p-dataTable>
   </div>
-</form>
+  <div *ngIf="selectedLine">
+    <app-requisition-line-detail [requisitionLine]="selectedLine"></app-requisition-line-detail>
+  </div>
 </p-fieldset>

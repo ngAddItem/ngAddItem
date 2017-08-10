@@ -1,0 +1,58 @@
+<p-fieldset>
+  <p-header>ID: {{ requisitionLine.itemId }} Name: {{ requisitionLine.itemDescription }}</p-header>
+  <form [formGroup]="lines" (ngSubmit)="onSubmit(lines)" novalidate>
+
+    <div class="ui-g">
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label for="test">Item Id: </label>
+        </div>
+        <div class="ui-g-8">
+          <input id="test" class="form-control" pInputText formControlName="itemId">
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Description: </label>
+        </div>
+        <div class="ui-g-8">
+          <input class="form-control" pInputText formControlName="itemDescription">
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Quantity:</label>
+        </div>
+        <div class="ui-g-8">
+          <!-- <input class="form-control" pInputText formControlName="quantity"> -->
+          <p-spinner formControlName="quantity"></p-spinner>
+        </div>
+        <div class="ui-g-4">
+          <label>Cost:</label>
+        </div>
+        <div class="ui-g-8">
+            <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon">$</span>
+            <input type="text" formControlName="cost" pInputText placeholder="Price">
+        </div>
+        </div>
+      </div>
+
+
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Ship Date:</label>
+        </div>
+        <div class="ui-g-8">
+          <p-calendar formControlName="shipDateDisplay" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+  <!-- {{ requisition.requisitionLines | json}} -->
+</p-fieldset>

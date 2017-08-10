@@ -1,0 +1,22 @@
+<div class="ui-datatable">
+    <p-dataTable [value]="requisitions" selectionMode="single" [(selection)]="selectedRequisition" dataKey="requisitionId" (onRowDblclick)="openRequisition()" [rows]="10"
+      [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]">
+      <p-header>
+        <h1>Requisition Dashboard</h1>
+      </p-header>
+
+      <p-column field="requisitionId" header="Request #"></p-column>
+      <p-column field="requisitionTitle" header="Name"></p-column>
+      <p-column field="vendorName" header="Vendor"></p-column>
+
+      <p-column field="requestTypeName" header="Request Type"></p-column>
+      <p-column field="statusName" header="Status"></p-column>
+
+      <p-column field="locationName" header="Location"></p-column>
+      <p-column field="shipDateDisplay" header="Ship Date">
+      </p-column>
+
+    </p-dataTable>
+  </div>
+  <div *ngIf="selectedRequisition">
+  </div>

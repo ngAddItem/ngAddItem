@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { Expose } from 'class-transformer';
 import { RequisitionLine } from './requisition-line.model';
 
@@ -33,10 +34,10 @@ export class Requisition {
     get requisitionTypeName(): string {
         return RequisitionType[this.requisitionType];
     }
-    // @Expose()
-    // get total(): number {
-    //     return this.requisitionLines.reduce((p, n) => p + n.price, 0);
-    // }
+    @Expose()
+    get total(): Observable<RequisitionLine> {
+        return Observable.from(this.requisitionLines);
+    }
     requisitionLines: RequisitionLine[]
 }
 

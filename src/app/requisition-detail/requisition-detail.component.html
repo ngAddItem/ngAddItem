@@ -1,4 +1,5 @@
-<p-fieldset>
+<div style="border-style: solid; border-color: red">
+  <p-fieldset>
   <p-header>ID: {{ requisition.requisitionId }} Name: {{ requisition.requisitionTitle }}</p-header>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" novalidate>
 
@@ -6,7 +7,7 @@
 
       <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label for="test">ID: </label>
+          <label for="test">ID</label>
         </div>
         <div class="ui-g-8">
           <input id="test" class="form-control" pInputText formControlName="requisitionId">
@@ -15,7 +16,7 @@
 
       <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label>Title: </label>
+          <label>Title</label>
         </div>
         <div class="ui-g-8">
           <input class="form-control" pInputText formControlName="requisitionTitle">
@@ -24,40 +25,55 @@
 
       <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label>Requisition Type:</label>
+          <label>Requisition Type</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [options]="requestTypeOptions" formControlName="requisitionType"></p-dropdown>
         </div>
+      </div>
 
+      <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label>Status:</label>
+          <label>Status</label>
         </div>
         <div class="ui-g-8">
           <p-dropdown [options]="statusOptions" formControlName="status"></p-dropdown>
         </div>
       </div>
 
-
       <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label>Location:</label>
+          <label>Location</label>
         </div>
         <div class="ui-g-8">
           <input class="form-control" pInputText formControlName="locationName">
         </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label>Ship Date:</label>
+          <label>Ship Date</label>
         </div>
         <div class="ui-g-8">
           <p-calendar formControlName="shipDateDisplay" [showIcon]="true"></p-calendar>
         </div>
       </div>
 
+      <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-4">
+          <label>Total</label>
+        </div>
+        <div class="ui-g-8">
+          <div class="ui-inputgroup">
+            <span class="ui-inputgroup-addon">$</span>
+            <input type="text" formControlName="total" pInputText placeholder="Price">
+          </div>
+        </div>
+      </div>
 
       <div class="ui-g-12 ui-md-6">
         <div class="ui-g-4">
-          <label>Notes:</label>
+          <label>Notes</label>
         </div>
         <div class="ui-g-8">
           <textarea pInputTextarea></textarea>
@@ -91,9 +107,9 @@
       </p-column>
       <p-column field="unitOfMeasure" header="UOM"></p-column>
       <p-column field="shipDate" header="Ship Date">
-         <ng-template let-col let-req2="rowData" pTemplate="body">
+        <ng-template let-col let-req2="rowData" pTemplate="body">
           <span>{{req2[col.field] | date}}</span>
-        </ng-template> 
+        </ng-template>
       </p-column>
       <!-- <p-footer>
         <div style="text-align: left">Selected Requisition: {{selectedRequisition ? selectedRequisition.requisitionId + ' - ' + selectedRequisition.requisitionTitle
@@ -101,7 +117,9 @@
       </p-footer> -->
     </p-dataTable>
   </div>
+
   <div *ngIf="selectedLine">
     <app-requisition-line-detail [requisitionLine]="selectedLine"></app-requisition-line-detail>
   </div>
 </p-fieldset>
+  </div>

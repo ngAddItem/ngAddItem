@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Rx';
+import { RequisitionLine } from '../model/requisition-line.model';
 import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SelectItem } from 'primeng/primeng';
@@ -12,6 +14,8 @@ import { RequisitionService } from '../model/requisition.service';
 })
 export class RequisitionDetailComponent implements OnInit, OnChanges {
   @Input() requisition: Requisition;
+  selectedLine: RequisitionLine;
+
   myForm: FormGroup;
   requestTypeOptions: SelectItem[];
   statusOptions: SelectItem[];
@@ -34,6 +38,7 @@ export class RequisitionDetailComponent implements OnInit, OnChanges {
       status: '',
       locationName: '',
       shipDateDisplay: '',
+      total: '',
     });
   }
   onSubmit({ value, valid }: { value: any, valid: boolean }) {
@@ -42,14 +47,14 @@ export class RequisitionDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.requisition = this.requisitionService.currentRequisition;
-
     (<FormGroup>this.myForm).setValue({
         requisitionId: this.requisition.requisitionId,
         requisitionTitle: this.requisition.requisitionTitle,
         requisitionType: this.requisition.requisitionType,
         status: this.requisition.statusId,
         locationName: this.requisition.locationName,
-        shipDateDisplay: this.requisition.shipDateDisplay
+        shipDateDisplay: this.requisition.shipDateDisplay,
+        total: this.requisition.total,
     });
   }
 

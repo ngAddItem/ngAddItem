@@ -1,1 +1,18 @@
+<button md-icon-button [mdMenuTriggerFor]="menu">
+  <md-icon>more_vert</md-icon>
+</button>
+<md-menu #menu="mdMenu">
+  <button md-menu-item (click)="openDashboard()">
+    <md-icon>account_balance_wallet</md-icon>
+    <span>Requisitions</span>
+  </button>
+  <button md-menu-item disabled>
+    <md-icon>check_box_outline_blank</md-icon>
+    <span>Purchase Orders</span>
+  </button>
+  <button md-menu-item>
+    <md-icon>radio_button_unchecked</md-icon>
+    <span>Receipts</span>
+  </button>
+</md-menu>
 <router-outlet></router-outlet>

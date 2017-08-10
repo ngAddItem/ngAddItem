@@ -1,4 +1,18 @@
-<p>
-  requisition-detail works!
-  {{ requisition.requisitionId}}
-</p>
+<p-fieldset><p-header>Requisition Detail for {{requisition.requisitionId}}</p-header>
+<form [formGroup]="myForm" >
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-4"><label>ID</label></div>
+      <div class="ui-g-8"><input type="text" formControlName="id">
+        <div *ngIf="!myForm.valid">required</div>
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      <div class="ui-g-4"><label>Title</label></div>
+      <div class="ui-g-8"><input type="text" formControlName="title">
+        <div *ngIf="!myForm.controls['title'].HasErrorr(isvalidphone)">required</div>
+       </div>
+    </div>
+  </div>
+</form>
+</p-fieldset>
